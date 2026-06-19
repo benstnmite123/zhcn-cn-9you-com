@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://benstnmite123.github.io/zhcn-cn-9you-com/sitemap.xml

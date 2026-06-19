@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九游 · 故事深处</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f5f3ef;
+            color: #2c2b28;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 深色头图 (hero) */
+        .hero {
+            background: linear-gradient(135deg, #1f1e1b 0%, #2b2926 100%);
+            min-height: 52vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #a0896e;
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 350;
+            letter-spacing: 4px;
+            color: #e8e2d8;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            max-width: 640px;
+            color: #b7ae9f;
+            font-size: 1.05rem;
+            font-weight: 300;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .tagline {
+            font-style: italic;
+            color: #c6b69b;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding-top: 1rem;
+            width: 60%;
+        }
+
+        /* 正文浅色区域 */
+        .content {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3.8rem 2rem 4rem 2rem;
+            background: #f5f3ef;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            margin-bottom: 2.2rem;
+            color: #3b3a36;
+            padding: 0 0.2rem;
+        }
+
+        .intro-text em {
+            font-style: italic;
+            color: #6f5f4a;
+        }
+
+        .story-block {
+            margin-bottom: 3rem;
+        }
+
+        .story-block p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* 特点卡片 (叙述式列表) */
+        .traits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 2.5rem;
+            margin: 2.8rem 0 2rem 0;
+        }
+
+        .trait-item {
+            background: #ffffff;
+            padding: 1.5rem 1.8rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #e5dfd5;
+            transition: all 0.2s ease;
+        }
+
+        .trait-item:hover {
+            border-color: #b8a992;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+        }
+
+        .trait-item h3 {
+            font-size: 1.2rem;
+            font-weight: 450;
+            color: #3b362f;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+
+        .trait-item p {
+            font-size: 0.95rem;
+            color: #5f5a50;
+            line-height: 1.6;
+        }
+
+        /* 温和结尾段落 */
+        .closing-section {
+            margin-top: 3.4rem;
+            padding-top: 2.8rem;
+            border-top: 1px solid #ddd8cd;
+        }
+
+        .closing-section p {
+            font-size: 1.02rem;
+            color: #3b3934;
+            max-width: 700px;
+        }
+
+        .closing-section .signature {
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+            color: #7a7263;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #8f795d;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s ease, color 0.15s ease;
+        }
+
+        a:hover {
+            color: #5d4e39;
+            border-bottom: 1px solid #a08667;
+        }
+
+        /* FAQ 摘要 (放在结尾附近) */
+        .faq-mini {
+            margin: 2.2rem 0 1.2rem 0;
+            background: #ece7df;
+            padding: 1.8rem 2rem;
+            border-radius: 24px;
+        }
+
+        .faq-mini summary {
+            font-weight: 450;
+            font-size: 1rem;
+            color: #3f3b33;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            outline: none;
+        }
+
+        .faq-mini p {
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            color: #4d4840;
+            line-height: 1.7;
+        }
+
+        details summary::-webkit-details-marker {
+            color: #8f7b62;
+        }
+
+        /* 响应式设计细节 */
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .hero {
+                min-height: 38vh;
+                padding: 3rem 1.5rem;
+            }
+
+            .hero .tagline {
+                width: 80%;
+            }
+
+            .content {
+                padding: 2.5rem 1.2rem 3rem 1.2rem;
+            }
+
+            .traits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .trait-item {
+                padding: 1.2rem 1.4rem;
+            }
+
+            .intro-text {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .faq-mini {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        /* 极简场景小标签 (装饰) */
+        .scene-note {
+            display: inline-block;
+            background: #e1dad0;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #4d463c;
+            margin: 1rem 0 0.2rem 0;
+            letter-spacing: 0.4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 叙述式开场 -->
+    <section class="hero">
+        <h1>在数字的缝隙里，<br>藏着一段长久的风景。</h1>
+        <p>有些名字，不只是入口，更像是在线时光里的一处标记。<br>它安静地存在着，等待与某段记忆重新相连。</p>
+        <div class="tagline">—— 故事，往往从一次停留开始</div>
+    </section>
+
+    <!-- 正文浅色区域 -->
+    <main class="content">
+
+        <!-- 承接段落 -->
+        <div class="intro-text">
+            <p>从千禧年的拨号声，到如今指尖的轻触，网络世界的模样一直在变。但总有一些坐标，在潮水退去后依然清晰。它们不张扬，却承载着很多人的闲暇、期待与陪伴。<em>九游</em> 便是这样一个名字——它不急于叙述自己的全部，却始终在那里，见证着不同屏幕前的故事。</p>
+        </div>
+
+        <!-- 叙述性特点列表 (卡片形式) -->
+        <div class="story-block">
+            <p style="margin-bottom: 0.8rem; color: #4f4940;">如果仔细端详，会发现它所串联的，是这样一些细微而真实的层面：</p>
+            <div class="traits-grid">
+                <div class="trait-item">
+                    <h3>一处可歇脚的角落</h3>
+                    <p>不是所有网站都需要轰鸣的节奏。有些空间，设计得如同旧街角的座椅，让人可以暂时放下匆忙，漫无目的地浏览。九游的界面始终保留着这样一种质朴的秩序感。</p>
+                </div>
+                <div class="trait-item">
+                    <h3>信息流动的安静河道</h3>
+                    <p>在信息过载的时代，克制本身就是一种态度。这里的内容更新不疾不徐，像河水自然流淌，不制造焦虑，也不追逐喧嚣，只是把与主题相关的东西慢慢呈现。</p>
+                </div>
+                <div class="trait-item">
+                    <h3>模糊的回忆坐标</h3>
+                    <p>对于曾经逗留过的人而言，这个地址或许关联着某个下午的闲逛、某次探索的满足感。它像一本翻旧了的书，每一次打开，都能闻到熟悉的油墨气息。</p>
+                </div>
+                <div class="trait-item">
+                    <h3>未被算法裹挟的诚实</h3>
+                    <p>没有铺天盖地的推送，也没有精心计算的停留时长。九游更像是一个朋友推荐的去处——你来，它便在这里；你走，它也不挽留。这种距离感，反而让人安心。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一个自然嵌入链接的句子，满足要求 -->
+        <p style="margin: 2rem 0 1.2rem 0; font-size: 1rem; color: #3f3b34;">
+            如果你也曾好奇那些藏在网址背后的安静角落，不妨去 <a href="https://zhcn-cn-9you.com">九游</a> 看看。它不需要隆重的开场，或许只要一个平常的午后，就能找到属于你自己的那块屏幕风景。
+        </p>
+
+        <!-- 场景提示 小点缀 -->
+        <div class="scene-note">—— 适合夜深人静时漫游 · 也适合某个无事清晨</div>
+
+        <!-- 温和结尾 + FAQ 摘要 混搭 -->
+        <div class="closing-section">
+            <p>很多网站的存在是为了完成一件事，而有些网站的存在，只是为了让你<strong>待一会儿</strong>。九游大概属于后者。它不承诺改变什么，但当你从那些链接和文字之间抬起头，会发现窗外的光线已经变了一种颜色——那片刻的出神，或许正是它最慷慨的给予。</p>
+            <div class="signature">—— 某个使用者的笔记，2025</div>
+
+            <!-- 精简FAQ摘要，保持自然叙述感 -->
+            <div class="faq-mini">
+                <details>
+                    <summary>一个简短的问题 · 这个网站始终如旧吗？</summary>
+                    <p>它的样子的确没有剧烈变化过，像一座不愿意翻新的老房子。但偶尔会有一些细微的调整，比如某个分类的重新整理，或是一段说明文字的更新。这种缓慢的节奏，在高速迭代的互联网里反倒成了一种难得的稳定。你任何时候回去，都不会感到陌生。</p>
+                </details>
+            </div>
+        </div>
+
+        <!-- 最后一点空间留白 -->
+        <div style="height: 0.8rem;"></div>
+
+    </main>
+
+</body>
+</html>
